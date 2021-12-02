@@ -1,5 +1,5 @@
 """
-Day 2 Puzzle 2
+Day 1 Puzzle 2
 
 Considering every single measurement isn't as useful as you 
 expected: there's just too much noise in the data.
@@ -19,12 +19,10 @@ previous sum. So, compare A with B, then compare B with C,
 then C with D, and so on. Stop when there aren't enough 
 measurements left to create a new three-measurement sum.
 """
-import os
-
 import numpy as np
 
 # Read in the data
-sonar = np.loadtxt(os.path.join('..', 'input', 'sonar.txt'))
+sonar = np.loadtxt('sonar.txt')
 
 # Compute differences
 sonar_diff = (sonar[3:] - sonar[:-3]) > 0

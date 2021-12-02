@@ -1,5 +1,5 @@
 """
-Day 2 Puzzle 2
+Day 2 Puzzle 1
 
 Considering every single measurement isn't as useful as you 
 expected: there's just too much noise in the data.
@@ -19,19 +19,18 @@ previous sum. So, compare A with B, then compare B with C,
 then C with D, and so on. Stop when there aren't enough 
 measurements left to create a new three-measurement sum.
 """
-import os
-
 import pandas as pd
 
 # Read in the data
 directions = pd.read_csv(
-	os.path.join('..', 'input', 'directions.txt'),
+	'directions.txt',
 	sep=' ',
-	names=['direction', 'amount'])
+	names=['command', 'amount'])
 
-# Set quantities as negative for down
+# Set quantities as negative for up
 directions.loc[directions.direction=='up', 'amount'] *= -1
-# Group into horizontal and depth
+
+# Define horizontal and depth directions
 directions.direction.replace('forward', 'horizontal', inplace=True)
 directions.direction.replace(['up', 'down'], 'depth', inplace=True)
 
