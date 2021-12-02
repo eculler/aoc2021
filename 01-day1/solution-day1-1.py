@@ -13,12 +13,13 @@ To do this, count the number of times a depth measurement
 increases from the previous measurement. (There is no 
 measurement before the first measurement.)
 """
+import os
 
 # Initialize increase count
 increases = 0
 
 # Open input file
-with open('input.txt', 'r') as sonar:
+with open(os.path.join('..', 'input', 'sonar.txt'), 'r') as sonar:
 	# Get the first line
 	previous_depth = sonar.readline()
 	

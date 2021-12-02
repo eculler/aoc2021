@@ -19,16 +19,24 @@ previous sum. So, compare A with B, then compare B with C,
 then C with D, and so on. Stop when there aren't enough 
 measurements left to create a new three-measurement sum.
 """
-import numpy as np
+import os
+
+import pandas as pd
 
 # Read in the data
-sonar = np.loadtxt('../input/sonar.txt')
+directions = pd.read_csv(
+	os.path.join('..', 'input', 'directions.txt'),
+	sep=' ',
+	names=['direction', 'amount'])
 
-# Compute differences
-sonar_diff = (sonar[3:] - sonar[:-3]) > 0
+# Set quantities as negative for down
+directions.loc[directions.direction=='up', 'amount'] *= -1
+# Group into horizontal and depth
+directions.direction.replace('forward', 'horizontal', inplace=True)
+directions.direction.replace(['up', 'down'], 'depth', inplace=True)
 
-# Compute number of increases
-increases = sonar_diff.sum()
+# Add up
+final_location = directions.groupby('direction').sum()
 
-# Print answer
-print(increases)
+# Print product
+print(final_location.product())
